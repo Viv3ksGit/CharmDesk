@@ -44,12 +44,14 @@ screen the first time; after that it remembers wherever you last dragged it.
 
 ## Using it
 
-- **Click** the charm to perform its ritual.
+- **Click** the charm to perform its ritual (diya, chime, falling petals).
 - **Drag** it anywhere on screen.
-- **System tray icon** (bottom-right near the clock on Windows, menu bar on
-  Mac) — Show/Hide, "Perform ritual", "Start with Windows", and Quit.
+- **Right-click** the charm, or use the **system tray icon** (bottom-right
+  near the clock on Windows, menu bar on Mac) — Show/Hide, "Perform ritual",
+  toggle flower petals on/off, resize, change the charm image, "Start with
+  Windows", and Quit.
 - **Global shortcuts** — `Ctrl+Shift+D` toggles visibility, `Ctrl+Shift+R`
-  performs the ritual, from anywhere.
+  performs the ritual, `Ctrl+Shift+=` / `Ctrl+Shift+-` resize, from anywhere.
 
 ## Building the installer yourself
 
@@ -84,11 +86,12 @@ upload from some networks by hand.
 
 | File | What it is |
 |---|---|
-| `main.js` | Electron main process — window creation, tray, global shortcuts, remembers window position |
-| `preload.js` | Bridges the main process's "perform ritual" signal into the renderer |
-| `renderer/index.html` | Markup + the SVG charm artwork |
-| `renderer/style.css` | Styles and the ritual animation |
-| `renderer/app.js` | Click handling, the synthesized chime (Web Audio, no audio assets) |
+| `main.js` | Electron main process — window/tray/context menu, global shortcuts, size + charm-image settings, remembers window position |
+| `preload.js` | Bridges main-process events (ritual, petals, image changes) into the renderer |
+| `renderer/index.html` | Markup |
+| `renderer/style.css` | Styles and the ritual/petal animations |
+| `renderer/app.js` | Click handling, the synthesized chime (Web Audio, no audio assets), petal shower |
+| `renderer/charm-ganesha.png` | Default charm art (swappable at runtime via "Change charm image…") |
 | `charms/charms.js` | The charm collection list (metadata for what's available) |
 | `assets/tray-icon.png` | Tray/menu-bar icon |
 

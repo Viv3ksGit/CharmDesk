@@ -2,6 +2,8 @@ node_modules/
 dist/
 out/
 
-# Copyrighted reference photo used only for local visual testing - never commit it.
+# Copyrighted reference photos used only for local visual testing - never commit them.
 assets/reference/
 renderer/ganesha-photo.webp
+renderer/ganesha-photo.png
+build.log
