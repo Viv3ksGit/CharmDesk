@@ -49,10 +49,11 @@
       ],
       "icon": "assets/icon.png",
       "category": "public.app-category.utilities",
-      "identity": "-",
+      "identity": null,
       "gatekeeperAssess": false,
       "hardenedRuntime": false
-    }
+    },
+    "afterSign": "scripts/afterSign.js"
   },
   "dependencies": {
     "electron-updater": "^6.8.9"
