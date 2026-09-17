@@ -28,6 +28,12 @@ establishes.
 2. Open the disk image and drag **CharmDesk.app** into **Applications**.
 3. On first launch, right-click the app and choose **Open** — the app isn't
    notarized, so a direct double-click is blocked by Gatekeeper once.
+4. If macOS instead reports **"CharmDesk" is damaged and can't be opened**,
+   that's Gatekeeper's quarantine flag on an unsigned download, not actual
+   corruption. Clear it from Terminal, then open the app normally:
+   ```bash
+   xattr -cr /Applications/CharmDesk.app
+   ```
 
 ### Run from source
 
