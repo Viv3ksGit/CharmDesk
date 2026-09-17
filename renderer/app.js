@@ -4,6 +4,11 @@ const charmPhoto = document.getElementById("charmPhoto");
 let ritualPlaying = false;
 let petalsEnabled = true;
 
+// Images are natively draggable in Chromium (ghost-image drag-and-drop),
+// which fights with our own custom window-drag below and can eat the
+// mouseup event - leaving the window stuck following the cursor forever.
+document.addEventListener("dragstart", (event) => event.preventDefault());
+
 // High-contrast marigold/jasmine tones so petals read clearly against the charm.
 const PETAL_COLORS = ["#ff9a3d", "#ffcf5c", "#fffaf0", "#ff6f4d", "#ffe08a"];
 const DEFAULT_CHARM_SRC = "charm-ganesha.png";

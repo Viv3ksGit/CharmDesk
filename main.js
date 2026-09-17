@@ -19,13 +19,19 @@ let petalsEnabled = true;
 let customImagePath = null;
 let dragInterval = null;
 let dragOffset = { x: 0, y: 0 };
+const DRAG_SAFETY_TIMEOUT_MS = 15000; // guards against a lost mouseup leaving this running forever
 
 function startWindowDrag() {
   if (!win || dragInterval) return;
   const cursor = screen.getCursorScreenPoint();
   const bounds = win.getBounds();
   dragOffset = { x: cursor.x - bounds.x, y: cursor.y - bounds.y };
+  const startedAt = Date.now();
   dragInterval = setInterval(() => {
+    if (Date.now() - startedAt > DRAG_SAFETY_TIMEOUT_MS) {
+      endWindowDrag();
+      return;
+    }
     const cur = screen.getCursorScreenPoint();
     win.setPosition(cur.x - dragOffset.x, cur.y - dragOffset.y);
   }, 16);
