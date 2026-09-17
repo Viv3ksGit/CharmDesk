@@ -1,36 +1,37 @@
 # CharmDesk
 
-A small always-on-top desktop charm that sits on your screen — inspired by
-[Lucky Dangle](https://luckydangle.app). Right now it's Ganesha: click him to
-offer a flame (a little diya circles him with a soft chime). Built with
-Electron so the same code runs on Windows and Mac.
+CharmDesk is a lightweight desktop companion that keeps a small,
+always-on-top charm on your screen. The current charm is Ganesha: click him
+to perform a ritual — a diya circles him with a soft chime and a shower of
+petals. Built with Electron, so the same codebase runs on both Windows and
+macOS.
 
-The charm collection is structured to grow — [charms/charms.js](charms/charms.js)
-is a plain list. Adding another charm later means dropping in new art plus a
-ritual, the same pattern Ganesha already follows.
+The charm collection is designed to grow. [charms/charms.js](charms/charms.js)
+defines the available charms as a simple list; adding a new one is a matter
+of supplying new artwork and a ritual, following the pattern Ganesha already
+establishes.
 
-## Install
+## Installation
 
-### Windows (just want to run it, no dev tools)
+### Windows
 
-1. Go to the [Releases](../../releases) page and download
-   `CharmDesk.Setup.<version>.exe`.
-2. Run it. Windows SmartScreen will likely warn "Windows protected your PC"
-   because the installer isn't code-signed (that costs a paid certificate) —
-   click **More info → Run anyway**.
-3. Follow the install wizard. CharmDesk launches automatically and adds
-   itself to your Start Menu.
+1. Download `CharmDesk Setup <version>.exe` from the [Releases](../../releases) page.
+2. Run the installer. Windows SmartScreen may show "Windows protected your
+   PC" because the build isn't code-signed — select **More info → Run
+   anyway** to continue.
+3. Complete the install wizard. CharmDesk launches automatically and adds a
+   Start Menu shortcut.
 
-### Mac
+### macOS
 
-1. Go to the [Releases](../../releases) page and download `CharmDesk-<version>.dmg`.
-2. Open it, drag **CharmDesk.app** into **Applications**.
-3. First launch: right-click the app → **Open** (it's unsigned/not notarized,
-   so a plain double-click gets blocked by Gatekeeper the first time only).
+1. Download `CharmDesk-<version>.dmg` from the [Releases](../../releases) page.
+2. Open the disk image and drag **CharmDesk.app** into **Applications**.
+3. On first launch, right-click the app and choose **Open** — the app isn't
+   notarized, so a direct double-click is blocked by Gatekeeper once.
 
-### Run from source (any platform, for development)
+### Run from source
 
-Requires [Node.js](https://nodejs.org) (18 or later) and git.
+Requires [Node.js](https://nodejs.org) 18 or later and git.
 
 ```bash
 git clone https://github.com/Viv3ksGit/CharmDesk.git
@@ -39,64 +40,61 @@ npm install
 npm start
 ```
 
-That launches the widget. It appears near the top-right of your primary
-screen the first time; after that it remembers wherever you last dragged it.
+On first launch the charm appears near the top-right of the primary display;
+its position is remembered afterward.
 
-## Using it
+## Usage
 
-- **Click** the charm to perform its ritual (diya, chime, falling petals).
-- **Drag** it anywhere on screen.
-- **Right-click** the charm, or use the **system tray icon** (bottom-right
-  near the clock on Windows, menu bar on Mac) — Show/Hide, "Perform ritual",
-  toggle flower petals on/off, resize, change the charm image, "Start with
-  Windows", and Quit.
-- **Global shortcuts** — `Ctrl+Shift+D` toggles visibility, `Ctrl+Shift+R`
-  performs the ritual, `Ctrl+Shift+=` / `Ctrl+Shift+-` resize, from anywhere.
+- **Click** the charm to perform its ritual.
+- **Drag** the charm to reposition it anywhere on screen.
+- **Right-click** the charm, or use the **system tray icon** (Windows) /
+  **menu bar icon** (macOS), to access: Show/Hide, Perform ritual, toggle
+  petal animation, resize, change the charm image, Start with Windows/at
+  Login, and Quit.
+- **Global shortcuts**: `Ctrl+Shift+D` toggles visibility, `Ctrl+Shift+R`
+  performs the ritual, `Ctrl+Shift+=` / `Ctrl+Shift+-` resize the charm.
 
-## Building the installer yourself
+## Building installers
 
-Packaging is done with [electron-builder](https://www.electron.build/).
+Packaging uses [electron-builder](https://www.electron.build/).
 
 ```bash
 npm run dist:win   # -> dist/CharmDesk Setup <version>.exe (build on Windows)
-npm run dist:mac   # -> dist/CharmDesk-<version>.dmg (must be built on macOS)
+npm run dist:mac   # -> dist/CharmDesk-<version>.dmg (build on macOS)
 ```
 
-Neither build is code-signed (that needs a paid certificate per platform),
-which is why SmartScreen/Gatekeeper flag them on first run — normal for a
-small unsigned app, not a sign anything's wrong.
+Neither build is code-signed, which triggers the SmartScreen/Gatekeeper
+warnings above — expected behavior for an unsigned application, not an
+indication of a problem.
 
-### Releasing a new version automatically
+### Automated releases
 
 [.github/workflows/release.yml](.github/workflows/release.yml) builds both
-installers on GitHub's own Windows and Mac runners and attaches them to a
-GitHub Release. It fires on any tag matching `v*.*.*`:
+installers on GitHub-hosted Windows and macOS runners and publishes them to
+a GitHub Release automatically. It triggers on any tag matching `v*.*.*`:
 
 ```bash
-npm version patch   # bumps package.json + creates a git tag, e.g. v0.1.1
+npm version patch   # bumps package.json and creates a git tag, e.g. v0.1.1
 git push --follow-tags
 ```
 
-A few minutes later both installers show up under
-[Releases](../../releases). This exists because building the Mac installer
-needs an actual Mac, and this project's installers are too large to reliably
-upload from some networks by hand.
+Both installers appear under [Releases](../../releases) a few minutes later.
 
-## Files
+## Project structure
 
-| File | What it is |
+| File | Description |
 |---|---|
-| `main.js` | Electron main process — window/tray/context menu, global shortcuts, size + charm-image settings, remembers window position |
-| `preload.js` | Bridges main-process events (ritual, petals, image changes) into the renderer |
-| `renderer/index.html` | Markup |
-| `renderer/style.css` | Styles and the ritual/petal animations |
-| `renderer/app.js` | Click handling, the synthesized chime (Web Audio, no audio assets), petal shower |
-| `renderer/charm-ganesha.png` | Default charm art (swappable at runtime via "Change charm image…") |
-| `charms/charms.js` | The charm collection list (metadata for what's available) |
+| `main.js` | Electron main process: window/tray/context menu, global shortcuts, size and charm-image settings, window position persistence |
+| `preload.js` | Bridges main-process events (ritual, petals, image changes) to the renderer |
+| `renderer/index.html` | Application markup |
+| `renderer/style.css` | Styles and ritual/petal animations |
+| `renderer/app.js` | Click handling, synthesized chime (Web Audio API), petal shower logic |
+| `renderer/charm-ganesha.png` | Default charm artwork (replaceable at runtime via "Change charm image…") |
+| `charms/charms.js` | Charm collection metadata |
 | `assets/tray-icon.png` | Tray/menu-bar icon |
 
 ## Notes
 
-- No network calls, no accounts, no telemetry.
-- The chime is synthesized with the Web Audio API — no audio files.
-- Respects `prefers-reduced-motion` for the ritual animation.
+- No network calls, accounts, or telemetry.
+- The chime is synthesized with the Web Audio API; no audio assets are used.
+- Respects `prefers-reduced-motion` for ritual animations.
