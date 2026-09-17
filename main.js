@@ -265,7 +265,10 @@ function toggleWindow() {
 
 function buildMenuTemplate({ includeShowHide = true } = {}) {
   const visible = win ? win.isVisible() : false;
-  const template = [];
+  const template = [
+    { label: `CharmDesk v${app.getVersion()}`, enabled: false },
+    { type: "separator" },
+  ];
   if (includeShowHide) {
     template.push({ label: visible ? "Hide Ganesha" : "Show Ganesha", click: toggleWindow });
   }
