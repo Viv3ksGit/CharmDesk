@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CharmDesk</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="drag-handle" id="dragHandle" title="Drag to move &middot; Click to offer the flame">
+
+      <!-- LOCAL TEST ONLY: swaps in the reference product photo instead of the vector
+           art. Not for distribution - it's someone else's copyrighted photo. Remove
+           the "photo-mode" class on <body> (or delete this img) to go back to the SVG. -->
+      <img class="charm-photo" id="charmPhoto" src="ganesha-photo.webp" alt="Ganesha reference photo" />
+
+      <svg class="charm-art" id="charmArt" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#ffe9b3" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#ffe9b3" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="skin" cx="34%" cy="28%" r="80%">
+            <stop offset="0%" stop-color="#e9eff5"/>
+            <stop offset="45%" stop-color="#b3c1d1"/>
+            <stop offset="100%" stop-color="#79899a"/>
+          </radialGradient>
+          <radialGradient id="skinEar" cx="30%" cy="25%" r="85%">
+            <stop offset="0%" stop-color="#dbe4ec"/>
+            <stop offset="55%" stop-color="#a6b5c5"/>
+            <stop offset="100%" stop-color="#71818f"/>
+          </radialGradient>
+          <radialGradient id="gold" cx="35%" cy="25%" r="85%">
+            <stop offset="0%" stop-color="#fff3c4"/>
+            <stop offset="50%" stop-color="#f0c04c"/>
+            <stop offset="100%" stop-color="#ab741d"/>
+          </radialGradient>
+          <radialGradient id="dhoti" cx="35%" cy="20%" r="90%">
+            <stop offset="0%" stop-color="#ffb463"/>
+            <stop offset="50%" stop-color="#f2822c"/>
+            <stop offset="100%" stop-color="#b04c0e"/>
+          </radialGradient>
+          <radialGradient id="gem" cx="35%" cy="25%" r="85%">
+            <stop offset="0%" stop-color="#ff9a9a"/>
+            <stop offset="55%" stop-color="#df3f3f"/>
+            <stop offset="100%" stop-color="#8c1c1c"/>
+          </radialGradient>
+          <radialGradient id="ladoo" cx="32%" cy="25%" r="85%">
+            <stop offset="0%" stop-color="#ffcf85"/>
+            <stop offset="55%" stop-color="#e8912f"/>
+            <stop offset="100%" stop-color="#a4600f"/>
+          </radialGradient>
+          <filter id="aoBlur" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3.2"/>
+          </filter>
+          <filter id="glossBlur" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.4"/>
+          </filter>
+        </defs>
+
+        <circle id="auraGlow" cx="100" cy="105" r="95" fill="url(#glow)" opacity="0"/>
+
+        <!-- contact shadow on the ground -->
+        <ellipse cx="100" cy="206" rx="54" ry="8" fill="#000" opacity="0.26" filter="url(#aoBlur)"/>
+
+        <!-- tiny gold pot beside him -->
+        <path d="M42 202 Q40 191 49 189 Q58 191 56 202 Q49 207 42 202 Z" fill="url(#gold)"/>
+        <ellipse cx="47" cy="192" rx="4" ry="2" fill="#fff" opacity="0.5"/>
+
+        <!-- sparkle accents -->
+        <path class="sparkle" d="M26 150 L28 156 L34 158 L28 160 L26 166 L24 160 L18 158 L24 156 Z" fill="#ffe9a8" opacity="0.85"/>
+        <path class="sparkle" d="M176 130 L177.6 134.4 L182 136 L177.6 137.6 L176 142 L174.4 137.6 L170 136 L174.4 134.4 Z" fill="#ffe9a8" opacity="0.85"/>
+
+        <!-- crossed legs / dhoti -->
+        <path d="M38 198 Q47 162 100 170 Q153 162 162 198 Q100 214 38 198 Z" fill="url(#dhoti)"/>
+        <path d="M38 198 Q100 210 162 198 Q100 202 38 198 Z" fill="#c9560f" opacity="0.5"/>
+        <path d="M50 172 Q100 182 150 172" fill="none" stroke="#fff" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+        <circle cx="100" cy="186" r="9" fill="url(#gold)"/>
+        <circle cx="98" cy="183.5" r="2" fill="#fff" opacity="0.6"/>
+
+        <!-- body: kept short so the big head reads chibi-cute -->
+        <path d="M68 172 Q63 132 100 126 Q137 132 132 172 Q100 186 68 172 Z" fill="url(#skin)"/>
+        <ellipse cx="100" cy="169" rx="30" ry="8" fill="#4b5866" opacity="0.35" filter="url(#aoBlur)"/>
+        <ellipse cx="89" cy="144" rx="14" ry="10" fill="#fff" opacity="0.35" filter="url(#glossBlur)"/>
+        <!-- bead necklace -->
+        <path d="M76 138 Q100 150 124 138" fill="none" stroke="url(#gold)" stroke-width="3"/>
+        <path d="M76 138 Q100 148 124 138" fill="none" stroke="#000" stroke-width="1" opacity="0.15"/>
+
+        <!-- ears: big and round for maximum cute -->
+        <ellipse cx="46" cy="92" rx="29" ry="34" fill="url(#skinEar)" transform="rotate(-14 46 92)"/>
+        <ellipse cx="154" cy="92" rx="29" ry="34" fill="url(#skinEar)" transform="rotate(14 154 92)"/>
+        <ellipse cx="48" cy="92" rx="17" ry="22" fill="#c7d3de" opacity="0.8" transform="rotate(-14 48 92)"/>
+        <ellipse cx="152" cy="92" rx="17" ry="22" fill="#c7d3de" opacity="0.8" transform="rotate(14 152 92)"/>
+        <ellipse cx="37" cy="74" rx="10" ry="14" fill="#fff" opacity="0.4" filter="url(#glossBlur)" transform="rotate(-14 37 74)"/>
+        <!-- shadow where ears meet the head -->
+        <ellipse cx="63" cy="94" rx="11" ry="28" fill="#4b5866" opacity="0.3" filter="url(#aoBlur)"/>
+        <ellipse cx="137" cy="94" rx="11" ry="28" fill="#4b5866" opacity="0.3" filter="url(#aoBlur)"/>
+
+        <!-- head: enlarged for a chibi head-to-body ratio -->
+        <circle cx="100" cy="92" r="50" fill="url(#skin)"/>
+        <ellipse cx="84" cy="64" rx="23" ry="16" fill="#fff" opacity="0.32" filter="url(#glossBlur)"/>
+        <!-- rosy cheeks, bigger and warmer for cuteness -->
+        <ellipse cx="67" cy="108" rx="12" ry="8" fill="#ef9d8c" opacity="0.4" filter="url(#glossBlur)"/>
+        <ellipse cx="133" cy="108" rx="12" ry="8" fill="#ef9d8c" opacity="0.4" filter="url(#glossBlur)"/>
+
+        <!-- crown, rounder dome -->
+        <path d="M60 68 Q62 34 100 26 Q138 34 140 68 Q120 52 100 54 Q80 52 60 68 Z" fill="url(#gold)"/>
+        <path d="M64 64 Q78 40 100 33" fill="none" stroke="#fff" stroke-width="2.2" opacity="0.35" stroke-linecap="round"/>
+        <ellipse cx="100" cy="72" rx="40" ry="7" fill="#4b3a12" opacity="0.25" filter="url(#aoBlur)"/>
+        <path d="M100 26 L100 12" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="100" cy="9" r="6.5" fill="url(#gold)"/>
+        <circle cx="98" cy="7" r="2" fill="#fff" opacity="0.6"/>
+        <circle cx="100" cy="52" r="7.5" fill="url(#gem)"/>
+        <circle cx="98" cy="49.5" r="2.2" fill="#fff" opacity="0.75"/>
+        <path d="M64 68 Q100 57 136 68" fill="none" stroke="#d13b3b" stroke-width="3" opacity="0.5"/>
+
+        <!-- tilak -->
+        <path d="M100 78 Q97 88 100 96 Q103 88 100 78 Z" fill="#e8734f"/>
+        <circle cx="100" cy="74" r="2.4" fill="#e8734f"/>
+
+        <!-- eyebrow shadow -->
+        <ellipse cx="80" cy="88" rx="12" ry="4" fill="#4b5866" opacity="0.16" filter="url(#glossBlur)"/>
+        <ellipse cx="120" cy="88" rx="12" ry="4" fill="#4b5866" opacity="0.16" filter="url(#glossBlur)"/>
+        <!-- eyes: big, wide-set, extra sparkle for cuteness -->
+        <ellipse cx="79" cy="98" rx="8.5" ry="10.5" fill="#241b14"/>
+        <ellipse cx="121" cy="98" rx="8.5" ry="10.5" fill="#241b14"/>
+        <ellipse cx="79" cy="95" rx="7" ry="6.5" fill="#42311f" opacity="0.6"/>
+        <ellipse cx="121" cy="95" rx="7" ry="6.5" fill="#42311f" opacity="0.6"/>
+        <circle cx="82" cy="93.5" r="2.8" fill="#fff"/>
+        <circle cx="124" cy="93.5" r="2.8" fill="#fff"/>
+        <circle cx="76" cy="102" r="1.3" fill="#fff" opacity="0.6"/>
+        <circle cx="118" cy="102" r="1.3" fill="#fff" opacity="0.6"/>
+        <path d="M69 87 Q79 80 89 87" fill="none" stroke="#5c6b7a" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M111 87 Q121 80 131 87" fill="none" stroke="#5c6b7a" stroke-width="2.2" stroke-linecap="round"/>
+
+        <!-- left arm raised, blessing: stubby and close to the body -->
+        <path d="M74 156 Q48 150 44 118 Q43 108 52 106 Q58 114 58 128 Q58 144 82 152 Z" fill="url(#skin)"/>
+        <ellipse cx="58" cy="152" rx="9" ry="14" fill="#4b5866" opacity="0.22" filter="url(#aoBlur)"/>
+        <ellipse cx="83" cy="154" rx="8" ry="4" fill="url(#gold)"/>
+        <circle cx="48" cy="108" r="12" fill="url(#skin)"/>
+        <ellipse cx="45" cy="104" rx="4.5" ry="5.5" fill="#fff" opacity="0.4" filter="url(#glossBlur)"/>
+        <path d="M43 101 Q48 96 53 101" fill="none" stroke="#e8734f" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M45 105 L45 115 M51 103 L51 115" stroke="#7c8b9a" stroke-width="1.5"/>
+
+        <!-- right arm holding a ladoo -->
+        <path d="M126 156 Q152 150 156 122 Q157 112 148 110 Q142 118 142 130 Q142 144 118 152 Z" fill="url(#skin)"/>
+        <ellipse cx="142" cy="152" rx="9" ry="14" fill="#4b5866" opacity="0.22" filter="url(#aoBlur)"/>
+        <ellipse cx="117" cy="154" rx="8" ry="4" fill="url(#gold)"/>
+        <circle cx="151" cy="112" r="14" fill="url(#ladoo)"/>
+        <circle cx="151" cy="112" r="14" fill="none" stroke="#8a5209" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
+        <ellipse cx="146" cy="107" rx="4.5" ry="3.4" fill="#fff" opacity="0.6" filter="url(#glossBlur)"/>
+
+        <!-- trunk, short and curled, tucked toward the ladoo -->
+        <path d="M100 118 Q92 130 99 140 Q107 148 117 144"
+              fill="none" stroke="url(#skin)" stroke-width="15" stroke-linecap="round"/>
+        <path d="M100 118 Q94 128 99 138"
+              fill="none" stroke="#fff" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+        <ellipse cx="100" cy="120" rx="12" ry="6" fill="#4b5866" opacity="0.25" filter="url(#aoBlur)"/>
+
+        <!-- tusks -->
+        <path d="M89 124 Q84 128 86 133" fill="none" stroke="#fbf6ea" stroke-width="4" stroke-linecap="round"/>
+        <path d="M111 126 Q116 130 114 135" fill="none" stroke="#fbf6ea" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+
+      <!-- diya used in the ritual animation -->
+      <svg class="diya" id="diya" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="30" rx="16" ry="6" fill="#b5651d"/>
+        <path class="flame" d="M20 8 Q26 18 20 24 Q14 18 20 8 Z" fill="#ffb347"/>
+      </svg>
+    </div>
+
+    <div class="tip" id="tip">click to offer the flame</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

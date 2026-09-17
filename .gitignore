@@ -1,0 +1,7 @@
+node_modules/
+dist/
+out/
+
+# Copyrighted reference photo used only for local visual testing - never commit it.
+assets/reference/
+renderer/ganesha-photo.webp

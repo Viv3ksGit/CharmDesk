@@ -1,0 +1,13 @@
+{
+  "name": "charmdesk",
+  "version": "0.1.0",
+  "description": "A small collection of charms that sit on your screen, starting with Ganesha.",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^32.0.0"
+  }
+}
