@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CharmDesk</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="drag-handle" id="dragHandle" title="Drag to move &middot; Click to offer the flame">
+
+      <div class="aura-glow" id="auraGlow"></div>
+
+      <img class="charm-photo" id="charmPhoto" src="charm-ganesha.png" alt="Ganesha charm" />
+
+      <!-- diya used in the ritual animation -->
+      <svg class="diya" id="diya" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="30" rx="16" ry="6" fill="#b5651d"/>
+        <path class="flame" d="M20 8 Q26 18 20 24 Q14 18 20 8 Z" fill="#ffb347"/>
+      </svg>
+    </div>
+
+    <div class="tip" id="tip">click to offer the flame</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
