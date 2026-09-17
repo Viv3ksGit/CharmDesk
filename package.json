@@ -17,6 +17,11 @@
   "build": {
     "appId": "com.charmdesk.app",
     "productName": "CharmDesk",
+    "publish": {
+      "provider": "github",
+      "owner": "Viv3ksGit",
+      "repo": "CharmDesk"
+    },
     "files": [
       "main.js",
       "preload.js",

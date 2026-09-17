@@ -23,9 +23,10 @@ ritual, the same pattern Ganesha already follows.
 
 ### Mac
 
-No packaged build yet — `.dmg` builds have to be produced on an actual Mac
-(or via CI), which this project hasn't set up. If you're on a Mac today, use
-the "run from source" method below.
+1. Go to the [Releases](../../releases) page and download `CharmDesk-<version>.dmg`.
+2. Open it, drag **CharmDesk.app** into **Applications**.
+3. First launch: right-click the app → **Open** (it's unsigned/not notarized,
+   so a plain double-click gets blocked by Gatekeeper the first time only).
 
 ### Run from source (any platform, for development)
 
@@ -59,9 +60,25 @@ npm run dist:win   # -> dist/CharmDesk Setup <version>.exe (build on Windows)
 npm run dist:mac   # -> dist/CharmDesk-<version>.dmg (must be built on macOS)
 ```
 
-The Windows build is unsigned (no purchased code-signing certificate), which
-is why SmartScreen flags it — this is normal for a small unsigned app and
-doesn't mean anything is wrong with it.
+Neither build is code-signed (that needs a paid certificate per platform),
+which is why SmartScreen/Gatekeeper flag them on first run — normal for a
+small unsigned app, not a sign anything's wrong.
+
+### Releasing a new version automatically
+
+[.github/workflows/release.yml](.github/workflows/release.yml) builds both
+installers on GitHub's own Windows and Mac runners and attaches them to a
+GitHub Release. It fires on any tag matching `v*.*.*`:
+
+```bash
+npm version patch   # bumps package.json + creates a git tag, e.g. v0.1.1
+git push --follow-tags
+```
+
+A few minutes later both installers show up under
+[Releases](../../releases). This exists because building the Mac installer
+needs an actual Mac, and this project's installers are too large to reliably
+upload from some networks by hand.
 
 ## Files
 
