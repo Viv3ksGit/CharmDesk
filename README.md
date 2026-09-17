@@ -9,12 +9,30 @@ The charm collection is structured to grow — [charms/charms.js](charms/charms.
 is a plain list. Adding another charm later means dropping in new art plus a
 ritual, the same pattern Ganesha already follows.
 
-## Install & run
+## Install
 
-Requires [Node.js](https://nodejs.org) (18 or later).
+### Windows (just want to run it, no dev tools)
+
+1. Go to the [Releases](../../releases) page and download
+   `CharmDesk.Setup.<version>.exe`.
+2. Run it. Windows SmartScreen will likely warn "Windows protected your PC"
+   because the installer isn't code-signed (that costs a paid certificate) —
+   click **More info → Run anyway**.
+3. Follow the install wizard. CharmDesk launches automatically and adds
+   itself to your Start Menu.
+
+### Mac
+
+No packaged build yet — `.dmg` builds have to be produced on an actual Mac
+(or via CI), which this project hasn't set up. If you're on a Mac today, use
+the "run from source" method below.
+
+### Run from source (any platform, for development)
+
+Requires [Node.js](https://nodejs.org) (18 or later) and git.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/Viv3ksGit/CharmDesk.git
 cd CharmDesk
 npm install
 npm start
@@ -32,12 +50,18 @@ screen the first time; after that it remembers wherever you last dragged it.
 - **Global shortcuts** — `Ctrl+Shift+D` toggles visibility, `Ctrl+Shift+R`
   performs the ritual, from anywhere.
 
-## Packaging a real installer (optional)
+## Building the installer yourself
 
-This repo runs from source via `npm start`. To produce a distributable
-`.exe`/`.dmg` you'd add [electron-builder](https://www.electron.build/) or
-[electron-forge](https://www.electronforge.io/) — not set up yet, since this
-is still an early prototype.
+Packaging is done with [electron-builder](https://www.electron.build/).
+
+```bash
+npm run dist:win   # -> dist/CharmDesk Setup <version>.exe (build on Windows)
+npm run dist:mac   # -> dist/CharmDesk-<version>.dmg (must be built on macOS)
+```
+
+The Windows build is unsigned (no purchased code-signing certificate), which
+is why SmartScreen flags it — this is normal for a small unsigned app and
+doesn't mean anything is wrong with it.
 
 ## Files
 

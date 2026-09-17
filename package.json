@@ -3,11 +3,47 @@
   "version": "0.1.0",
   "description": "A small collection of charms that sit on your screen, starting with Ganesha.",
   "main": "main.js",
+  "author": "Viv",
   "private": true,
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac"
   },
   "devDependencies": {
-    "electron": "^32.0.0"
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.charmdesk.app",
+    "productName": "CharmDesk",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "charms/**/*",
+      "assets/tray-icon.png",
+      "assets/icon.png",
+      "!assets/reference/**",
+      "!renderer/ganesha-photo.webp"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.utilities"
+    }
   }
 }
